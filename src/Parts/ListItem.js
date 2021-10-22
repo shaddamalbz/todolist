@@ -41,7 +41,7 @@ export default function ItemList(props) {
               className="icon-plus"
               src={Plus}
               alt="icon plus for adding activity"
-              data-cy="tabler:plus"
+              data-cy="todo-add-button"
             />{" "}
             Tambah
           </Button>

@@ -49,13 +49,13 @@ export default function Dashboard(props) {
             className="icon-plus"
             src={Plus}
             alt="icon plus for adding activity"
-            data-cy="tabler:plus"
+            data-cy="activity-add-button"
           />{" "}
           Tambah
         </Button>
       </div>
       {isActivityEmpty ? (
-        <ActivityEmptyState />
+        <ActivityEmptyState data-cy="activity-empty-state" />
       ) : (
         <div className="card-container">
           {activity.data &&
@@ -67,6 +67,7 @@ export default function Dashboard(props) {
                   key={index}
                   activity={item}
                   onDelete={() => onDelete(item.id)}
+                  data-cy="activity-item"
                 />
               );
             })}
