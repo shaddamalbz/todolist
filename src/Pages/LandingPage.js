@@ -1,36 +1,58 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import axios from "axios";
 
 // Parts
-import Dashboard from "../Parts/Dashboard";
+const Dashboard = lazy(() => import("../Parts/Dashboard"));
 
-export default class LandingPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activity: [],
-    };
-  }
+export default function LandingPage() {
+  const [activity, setActivity] = useState({});
+  const [hasLoaded, setHasLoaded] = useState(false);
 
-  componentDidMount() {
-    axios
-      .get(
+  useEffect(() => {
+    const fetchActvity = async () => {
+      const result = await axios(
         "https://todo.api.devcode.gethired.id/activity-groups?email=shaddamalghafiqih11@gmail.com"
-      )
-      .then((res) => {
-        this.setState({
-          activity: res.data,
-        });
+      );
+      setActivity(result.data);
+      setHasLoaded(true);
+    };
+    if (!hasLoaded) {
+      fetchActvity();
+    }
+  }, [hasLoaded]);
+
+  const onAddActivity = async () => {
+    try {
+      await axios.post("https://todo.api.devcode.gethired.id/activity-groups", {
+        title: "New Activity",
+        email: "shaddamalghafiqih11@gmail.com",
       });
-  }
+      setHasLoaded(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  render() {
-    const { activity } = this.state;
+  const onDeleteActivity = async (id) => {
+    try {
+      await axios.delete(
+        `https://todo.api.devcode.gethired.id/activity-groups/${id}`
+      );
+      setHasLoaded(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    return (
-      <>
-        <Dashboard activity={activity} />
-      </>
-    );
-  }
+  return (
+    <>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Dashboard
+          activity={activity}
+          onAddActivity={onAddActivity}
+          onDeleteActivity={onDeleteActivity}
+        />
+      </Suspense>
+    </>
+  );
 }

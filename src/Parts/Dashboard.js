@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
 
 // Parts
 import ActivityEmptyState from "./ActivityEmptyState";
@@ -12,26 +11,9 @@ import Card from "../Components/Card";
 import Plus from "../assets/svg/plus.svg";
 
 export default function Dashboard(props) {
-  const { activity } = props;
-  const [isLoading, setisLoading] = useState(false);
+  const { activity, onAddActivity, onDeleteActivity } = props;
 
   let isActivityEmpty = activity.total > 0 ? false : true;
-
-  const onClick = () => {
-    setisLoading(true);
-    axios
-      .post("https://todo.api.devcode.gethired.id/activity-groups", {
-        title: "New Activity",
-        email: "shaddamalghafiqih11@gmail.com",
-      })
-      .then((res) => {
-        setisLoading(false);
-      });
-  };
-
-  const onDelete = (id) => {
-    axios.delete(`https://todo.api.devcode.gethired.id/activity-groups/${id}`);
-  };
 
   return (
     <section>
@@ -39,12 +21,7 @@ export default function Dashboard(props) {
         <h3 className="activity-title" data-cy="activity-title">
           Activity
         </h3>
-        <Button
-          isPrimary
-          data-cy="activity-add-button"
-          onClick={onClick}
-          isLoading={isLoading}
-        >
+        <Button isPrimary data-cy="activity-add-button" onClick={onAddActivity}>
           <img
             className="icon-plus"
             src={Plus}
@@ -66,7 +43,7 @@ export default function Dashboard(props) {
                   href={`/activity/${item.id}`}
                   key={index}
                   activity={item}
-                  onDelete={() => onDelete(item.id)}
+                  onDelete={() => onDeleteActivity(item.id)}
                   data-cy="activity-item"
                 />
               );

@@ -12,7 +12,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header />
+        <Header data-cy="header-background" />
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/activity/:id" component={DetailActivity} />

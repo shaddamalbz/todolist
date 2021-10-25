@@ -36,7 +36,7 @@ export default function index(props) {
   return (
     <>
       <div className="card-activity">
-        <Link to={`/activity/${activity.id}`}>
+        <Link to={`/activity/${activity.id}`} className="card-body">
           <h3 className="card-title" data-cy="activity-item-title">
             {activity.title ? activity.title : ""}
           </h3>
