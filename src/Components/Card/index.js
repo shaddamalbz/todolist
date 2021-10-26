@@ -7,7 +7,7 @@ import Trashcan from "../../assets/svg/trashcan.svg";
 import "./index.css";
 
 export default function index(props) {
-  const { activity } = props;
+  const { activity, datacy } = props;
 
   const date = new Date(activity.created_at);
   const day = date.getDate();
@@ -35,7 +35,7 @@ export default function index(props) {
 
   return (
     <>
-      <div className="card-activity">
+      <div className="card-activity" data-cy={datacy}>
         <Link to={`/activity/${activity.id}`} className="card-body">
           <h3 className="card-title" data-cy="activity-item-title">
             {activity.title ? activity.title : ""}

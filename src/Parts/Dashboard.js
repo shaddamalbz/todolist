@@ -21,18 +21,17 @@ export default function Dashboard(props) {
         <h3 className="activity-title" data-cy="activity-title">
           Activity
         </h3>
-        <Button isPrimary data-cy="activity-add-button" onClick={onAddActivity}>
+        <Button isPrimary onClick={onAddActivity} datacy="activity-add-button">
           <img
             className="icon-plus"
             src={Plus}
             alt="icon plus for adding activity"
-            data-cy="activity-add-button"
           />{" "}
           Tambah
         </Button>
       </div>
       {isActivityEmpty ? (
-        <ActivityEmptyState data-cy="activity-empty-state" />
+        <ActivityEmptyState datacy="activity-empty-state" />
       ) : (
         <div className="card-container">
           {activity.data &&
@@ -44,7 +43,7 @@ export default function Dashboard(props) {
                   key={index}
                   activity={item}
                   onDelete={() => onDeleteActivity(item.id)}
-                  data-cy="activity-item"
+                  datacy="activity-item"
                 />
               );
             })}

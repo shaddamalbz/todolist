@@ -40,7 +40,7 @@ export default function DetailActivity(props) {
           items={todo.todo_items}
           onAddTodo={onAddTodo}
         />
-        <Modal isShow={showModal} onClose={onClose} />
+        <Modal isShow={showModal} onClose={onClose} data-cy="modal-add" />
       </Suspense>
     </>
   );
