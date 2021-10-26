@@ -30,12 +30,10 @@ export default function ItemList(props) {
           <img src={Edit} alt="pen" data-cy="todo-title-edit-button" />
         </div>
         <div className="itemlist-right">
-          {items && items.length !== 0 && (
-            <div className="itemlist-sort-button" data-cy="todo-sort-button">
-              <img src={Arrowsort} alt="arrow upside downside" />
-            </div>
-          )}
-          <Button isPrimary data-cy="todo-add-button" onClick={onAddTodo}>
+          <div className="itemlist-sort-button" data-cy="todo-sort-button">
+            <img src={Arrowsort} alt="arrow upside downside" />
+          </div>
+          <Button isPrimary datacy="todo-add-button" onClick={onAddTodo}>
             <img
               className="icon-plus"
               src={Plus}

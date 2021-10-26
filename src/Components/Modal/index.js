@@ -44,7 +44,7 @@ export default function index({ isShow, onClose }) {
           </form>
         </div>
         <div className="modal-footer">
-          <Button isPrimary isDisable data-cy="modal-add-save-button">
+          <Button isPrimary isDisable datacy="modal-add-save-button">
             Simpan
           </Button>
         </div>
