@@ -15,44 +15,40 @@ import Back from "../assets/svg/todo-back-button.svg";
 import Arrowsort from "../assets/svg/arrow-sort.svg";
 
 export default function ItemList(props) {
-  const { list } = props;
-  const isListEmpty = list.length === 0 ? true : false;
+  const { title, items, onAddTodo } = props;
 
   return (
     <section>
       <div className="itemlist">
         <div className="itemlist-left">
-          <Link to="/">
-            <img src={Back} alt="smaller than" data-cy="todo-back-button" />
+          <Link to="/" data-cy="todo-back-button">
+            <img src={Back} alt="smaller than" />
           </Link>
           <h3 className="itemlist-title" data-cy="todo-title">
-            New Activity
+            {title}
           </h3>
           <img src={Edit} alt="pen" data-cy="todo-title-edit-button" />
         </div>
         <div className="itemlist-right">
-          {!isListEmpty && (
-            <div className="itemlist-sort-button">
+          {items && items.length !== 0 && (
+            <div className="itemlist-sort-button" data-cy="todo-sort-button">
               <img src={Arrowsort} alt="arrow upside downside" />
             </div>
           )}
-          <Button isPrimary data-cy="todo-add-button">
+          <Button isPrimary data-cy="todo-add-button" onClick={onAddTodo}>
             <img
               className="icon-plus"
               src={Plus}
               alt="icon plus for adding activity"
-              data-cy="todo-add-button"
             />{" "}
             Tambah
           </Button>
         </div>
       </div>
-      {isListEmpty ? (
-        <ListEmptyState />
+      {items && items.length === 0 ? (
+        <ListEmptyState data-cy="todo-empty-state" />
       ) : (
         <div className="list-container">
-          <List />
-          <List />
           <List />
         </div>
       )}

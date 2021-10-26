@@ -5,6 +5,7 @@ import "./index.css";
 export default function index(props) {
   const className = [props.className];
   if (props.isPrimary) className.push("btn-primary");
+  if (props.isDisable) className.push("btn-disable");
 
   const onClick = () => {
     if (props.onClick) props.onClick();

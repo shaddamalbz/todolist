@@ -50,6 +50,7 @@ export default function index(props) {
             src={Trashcan}
             alt="Icon trashcan"
             onClick={onDelete}
+            data-cy="activity-item-delete-button"
           />
         </div>
       </div>
