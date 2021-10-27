@@ -58,6 +58,7 @@ export default function ItemList(props) {
               value={newTitle}
               onChange={onChangeTitle}
               onKeyDown={(e) => onTyping(e)}
+              data-cy="todo-title"
             />
           ) : (
             <h3 className="itemlist-title" data-cy="todo-title">
