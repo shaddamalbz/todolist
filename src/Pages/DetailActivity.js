@@ -35,11 +35,14 @@ export default function DetailActivity(props) {
   return (
     <>
       <Suspense fallback={<p>Loading...</p>}>
-        <ListItem
-          title={todo.title}
-          items={todo.todo_items}
-          onAddTodo={onAddTodo}
-        />
+        {hasLoaded && (
+          <ListItem
+            title={todo.title}
+            items={todo.todo_items}
+            onAddTodo={onAddTodo}
+            id={props.match.params.id}
+          />
+        )}
         <Modal isShow={showModal} onClose={onClose} data-cy="modal-add" />
       </Suspense>
     </>
