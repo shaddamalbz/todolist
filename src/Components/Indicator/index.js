@@ -10,5 +10,5 @@ export default function index(props) {
   if (props.priority === "low") className.push("low");
   if (props.priority === "very-low") className.push("very-low");
 
-  return <div className={`indicator ${className.join(" ")}`}></div>;
+  return <span className={`indicator ${className.join(" ")}`}></span>;
 }

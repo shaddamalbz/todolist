@@ -8,9 +8,16 @@ import cross from "../../assets/svg/modal-add-close-button.svg";
 
 import "./index.css";
 
-export default function index({ isShow, onClose }) {
+export default function index({
+  isShow,
+  onClose,
+  datacy,
+  onSubmit,
+  onChange,
+  isDisable,
+}) {
   return (
-    <div className={`${!isShow ? "hidden" : ""}`}>
+    <div className={`${!isShow ? "hidden" : ""}`} data-cy={datacy}>
       <div className="modal-bg"></div>
       <div className="modal">
         <div className="modal-header">
@@ -24,29 +31,44 @@ export default function index({ isShow, onClose }) {
           />
         </div>
         <div className="modal-body">
-          <form action="" className="form">
+          <form className="form">
             <label htmlFor="name" data-cy="modal-add-name-title">
               NAMA LIST ITEM
             </label>
             <input
+              name="title"
               type="text"
               placeholder="Tambahkan nama list item"
               data-cy="modal-add-name-input"
+              onChange={(e) => onChange(e)}
             />
             <label htmlFor="priority" data-cy="modal-add-priority-title">
               PRIORITY
             </label>
-            <input
-              type="text"
-              placeholder="Tambahkan nama list item"
+            <select
               data-cy="modal-add-priority-input"
-            />
+              name="priority"
+              onChange={(e) => onChange(e)}
+            >
+              <option>Pilih priority</option>
+              <option value="very-high">Very High</option>
+              <option value="high">High</option>
+              <option value="normal">Medium</option>
+              <option value="low">Low</option>
+              <option value="very-low"> Very Low</option>
+            </select>
           </form>
         </div>
         <div className="modal-footer">
-          <Button isPrimary isDisable datacy="modal-add-save-button">
-            Simpan
-          </Button>
+          {isDisable ? (
+            <Button isDisable datacy="modal-add-save-button">
+              Simpan
+            </Button>
+          ) : (
+            <Button isPrimary datacy="modal-add-save-button" onClick={onSubmit}>
+              Simpan
+            </Button>
+          )}
         </div>
       </div>
     </div>

@@ -11,6 +11,13 @@ export default function DetailActivity(props) {
   const [todo, setTodo] = useState([]);
   const [hasLoaded, setHasLoaded] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [form, setForm] = useState({
+    title: "",
+    priority: "",
+    activity_group_id: props.match.params.id,
+  });
+
+  const formFilled = form.title !== "" && form.priority !== "" ? true : false;
 
   useEffect(() => {
     const fetchTodo = async () => {
@@ -32,6 +39,24 @@ export default function DetailActivity(props) {
   const onClose = () => {
     setShowModal(false);
   };
+
+  const onSubmit = () => {
+    axios
+      .post("https://todo.api.devcode.gethired.id/todo-items", form)
+      .then((res) => {
+        console.log(res);
+        setShowModal(false);
+        setHasLoaded(false);
+      });
+  };
+
+  const onChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   return (
     <>
       <Suspense fallback={<p>Loading...</p>}>
@@ -43,7 +68,14 @@ export default function DetailActivity(props) {
             id={props.match.params.id}
           />
         )}
-        <Modal isShow={showModal} onClose={onClose} data-cy="modal-add" />
+        <Modal
+          isShow={showModal}
+          onClose={onClose}
+          datacy="modal-add"
+          onSubmit={onSubmit}
+          onChange={(e) => onChange(e)}
+          isDisable={!formFilled}
+        />
       </Suspense>
     </>
   );
