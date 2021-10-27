@@ -46,16 +46,29 @@ export default function index({
               PRIORITY
             </label>
             <select
-              data-cy="modal-add-priority-input"
+              data-cy="modal-add-priority-dropdown"
               name="priority"
               onChange={(e) => onChange(e)}
             >
-              <option>Pilih priority</option>
-              <option value="very-high">Very High</option>
-              <option value="high">High</option>
-              <option value="normal">Medium</option>
-              <option value="low">Low</option>
-              <option value="very-low"> Very Low</option>
+              <option data-cy="modal-input-priority-item">
+                Pilih priority
+              </option>
+              <option data-cy="modal-input-priority-item" value="very-high">
+                Very High
+              </option>
+              <option data-cy="modal-input-priority-item" value="high">
+                High
+              </option>
+              <option data-cy="modal-input-priority-item" value="normal">
+                Medium
+              </option>
+              <option data-cy="modal-input-priority-item" value="low">
+                Low
+              </option>
+              <option data-cy="modal-input-priority-item" value="very-low">
+                {" "}
+                Very Low
+              </option>
             </select>
           </form>
         </div>
