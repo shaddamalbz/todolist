@@ -4,9 +4,14 @@ import axios from "axios";
 // Parts
 const Dashboard = lazy(() => import("../Parts/Dashboard"));
 
+// Components
+const ModalDelete = lazy(() => import("../Components/Modal/ModalDelete"));
+
 export default function LandingPage() {
   const [activity, setActivity] = useState({});
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
+  const [id, setId] = useState(0);
 
   useEffect(() => {
     const fetchActvity = async () => {
@@ -34,13 +39,23 @@ export default function LandingPage() {
   };
 
   const onDeleteActivity = async (id) => {
+    setShowModalDelete(true);
+    setId(id);
+  };
+
+  const onCancel = () => {
+    setShowModalDelete(false);
+  };
+
+  const submitDelete = async () => {
     try {
       await axios.delete(
         `https://todo.api.devcode.gethired.id/activity-groups/${id}`
       );
+      setShowModalDelete(false);
       setHasLoaded(false);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -51,6 +66,12 @@ export default function LandingPage() {
           activity={activity}
           onAddActivity={onAddActivity}
           onDeleteActivity={onDeleteActivity}
+        />
+        <ModalDelete
+          type="activity"
+          isShow={showModalDelete}
+          onCancel={onCancel}
+          onDelete={submitDelete}
         />
       </Suspense>
     </>

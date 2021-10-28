@@ -19,3 +19,8 @@ button:hover {
 .btn-disable {
   opacity: 0.2;
 }
+
+.btn-warning {
+  background-color: #ed4c5c;
+  color: #fff;
+}

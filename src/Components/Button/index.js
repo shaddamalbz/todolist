@@ -6,6 +6,7 @@ export default function index(props) {
   const className = [props.className];
   let datacy = "";
   if (props.isPrimary) className.push("btn-primary");
+  if (props.isWarning) className.push("btn-warning");
   if (props.isDisable) className.push("btn-disable");
   if (props.datacy) datacy = props.datacy;
 
